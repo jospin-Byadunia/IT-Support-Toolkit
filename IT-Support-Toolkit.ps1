@@ -69,6 +69,15 @@ Out-File $reportPath -Append
 "`n--- Network Connectivity Test (Ping Google) ---" | Out-File $reportPath -Append
 Test-Connection google.com -Count 4 | Out-File $reportPath -Append
 
+# 13. check user account info
+"`n--- Local Administrators ---" | Out-File $reportPath -Append
+Get-LocalGroupMember Administrators | Out-File $reportPath -Append
+
+# 14. Firewall Status
+"`n--- Firewall Status ---" | Out-File $reportPath -Append
+Get-NetFirewallProfile | Select-Object Name, Enabled | Out-File $reportPath -Append
+
+
 # Completion Message
 "`nReport saved to: $reportPath" | Out-File $reportPath -Append
 Write-Host "`n Report generated! Check your Desktop: System_Report.txt" -ForegroundColor Green
